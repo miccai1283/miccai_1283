@@ -1,0 +1,45 @@
+# Defines model architecture
+model_params:
+  common_params:
+    # Number of keypoint
+    num_kp: 12
+    # Number of channels per image, rgb=3, gray=1
+    num_channels: 1
+    # Using first or zero order model
+    estimate_jacobian: True
+  kp_detector_params:
+     # Softmax temperature for keypoint heatmaps
+     temperature: 0.1
+     # Number of features mutliplier
+     block_expansion: 32
+     # Maximum allowed number of features
+     max_features: 1024
+     # Number of block in Unet. Can be increased or decreased depending or resolution.
+     num_blocks: 5
+     # Keypioint is predicted on smaller images for better performance,
+     # scale_factor=0.25 means that 256x256 image will be resized to 64x64
+     scale_factor: 0.25
+  generator_params:
+    # Number of features mutliplier
+    block_expansion: 64
+    # Maximum allowed number of features
+    max_features: 512
+    # Number of downsampling blocks in Jonson architecture.
+    # Can be increased or decreased depending or resolution.
+    num_down_blocks: 2
+    # Number of ResBlocks  in Jonson architecture.
+    num_bottleneck_blocks: 6
+    # Use occlusion map or not
+    estimate_occlusion_map: True
+
+    dense_motion_params:
+      # Number of features mutliplier
+      block_expansion: 64
+      # Maximum allowed number of features
+      max_features: 1024
+      # Number of block in Unet. Can be increased or decreased depending or resolution.
+      num_blocks: 5
+      # Dense motion is predicted on smaller images for better performance,
+      # scale_factor=0.25 means that 256x256 image will be resized to 64x64
+      scale_factor: 0.25
+
